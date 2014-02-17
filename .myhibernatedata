@@ -1,0 +1,24 @@
+#MyEclipse Hibernate Properties
+#Wed Feb 05 13:11:37 CST 2014
+sessionFactoryName=nju.edu.common.HibernateSessionFactory
+genBasicCompId=false
+profile=
+daoSFId=p14_sessionFactory
+version=3.3
+jndiPath=
+detectM2M=false
+reStrategyClass=
+detectO2O=false
+springDaoFile=resources/applicationContext.xml
+useJavaTypes=true
+keyGenerator=
+libInstallFolder=
+addLibs2Project=false
+genVersionTag=false
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=/crawler/hibernate.reveng.xml
+configFile=/crawler/resources/applicationContext.xml
+createConfigFile=false
+addLibs2Classpath=false

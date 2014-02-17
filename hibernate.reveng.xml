@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table name="p13_product" catalog="site"
+		class="nju.edu.p13.model.Product">
+		<primary-key>
+			<generator class="assigned"></generator>
+		</primary-key>
+	</table>
+	<table name="p12_navon_item" catalog="site"
+		class="nju.edu.p12.model.NavonItem">
+	</table>
+	<table name="p12_navon_answer" catalog="site" class="nju.edu.p12.model.NavonAnswer"></table>
+</hibernate-reverse-engineering>

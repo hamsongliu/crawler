@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:database.properties" />
+	</bean>
+	
+	<bean id="p14_dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${maindb.driver}" />
+		<property name="jdbcUrl" value="${maindb.url}" />
+		<property name="user" value="${maindb.username}" />
+		<property name="password" value="${maindb.password}" />
+		<property name="maxIdleTime">
+			<value>28000</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>28000</value>
+		</property>
+	</bean>
+	
+	<bean id="p14_sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="p14_dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					${maindb.dialect}
+				</prop>
+				<prop key="hibernate.show_sql">
+					false
+				</prop>
+				<prop key="hibernate.connection.provider_class">
+					org.hibernate.connection.C3P0ConnectionProvider
+				</prop>
+				<prop key="hibernate.c3p0.max_size">
+					20
+				</prop>
+				<prop key="hibernate.c3p0.min_size">
+					5
+				</prop>
+				<prop key="hibernate.c3p0.timeout">
+					120
+				</prop>
+				<prop key="hibernate.c3p0.max_statements">
+					200
+				</prop>
+				<prop key="hibernate.c3p0.idle_test_period">
+					120
+				</prop>
+				<prop key="hibernate.connection.autoReconnect">
+					true
+				</prop>
+			</props>
+		</property>
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath*:nju/edu/p14/model</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="p14_ProductDAO" class="nju.edu.p14.dao.ProductDAO">
+		<property name="sessionFactory">
+			<ref bean="p14_sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="BestBuyCrawler" class="nju.edu.p14.crawler.BestBuyCrawler">
+		<property name="productDAO" ref="p14_ProductDAO"></property>
+	</bean>	
+	
+	<bean id="AmazonCrawler" class="nju.edu.p14.crawler.AmazonCrawler">
+		<property name="productDAO" ref="p14_ProductDAO"></property>
+	</bean>	
+</beans>
